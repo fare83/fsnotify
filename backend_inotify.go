@@ -578,7 +578,7 @@ func (w *Watcher) newEvent(name string, mask uint32) Event {
 	if mask&unix.IN_ATTRIB == unix.IN_ATTRIB {
 		e.Op |= Chmod
 	}
-	if mask&unix.IN_CLOSE == unix.IN_CLOSE|mask&unix.IN_CLOSE_NOWRITE == unix.IN_CLOSE_NOWRITE|mask&unix.IN_CLOSE_WRITE == unix.IN_CLOSE_WRITE {
+	if mask&unix.IN_CLOSE == unix.IN_CLOSE || mask&unix.IN_CLOSE_NOWRITE == unix.IN_CLOSE_NOWRITE || mask&unix.IN_CLOSE_WRITE == unix.IN_CLOSE_WRITE {
 		e.Op |= Close
 	}
 	return e
